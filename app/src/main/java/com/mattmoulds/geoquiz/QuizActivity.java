@@ -4,6 +4,7 @@ import android.app.AlertDialog;
 import android.media.Image;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -14,6 +15,8 @@ import android.widget.Toast;
 
 
 public class QuizActivity extends ActionBarActivity {
+
+    private static final String TAG = "QuizActivity";
 
     private Button mTrueButton;
     private Button mFalseButton;
@@ -54,6 +57,7 @@ public class QuizActivity extends ActionBarActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Log.d(TAG, "onCreate(Bundle) called");
         setContentView(R.layout.activity_quiz);
 
 
@@ -96,8 +100,8 @@ public class QuizActivity extends ActionBarActivity {
         mPreviousButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (mCurrentIndex == 0) mCurrentIndex = mQuestionBank.length -1;
-                else mCurrentIndex = mCurrentIndex -1;
+                if (mCurrentIndex == 0) mCurrentIndex = mQuestionBank.length - 1;
+                else mCurrentIndex = mCurrentIndex - 1;
                 updateQuestion();
             }
         });
@@ -105,6 +109,35 @@ public class QuizActivity extends ActionBarActivity {
         updateQuestion();
     }
 
+    @Override
+    public void onStart() {
+        super.onStart();
+        Log.d(TAG, "onStart() called");
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        Log.d(TAG, "onPause() called");
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        Log.d(TAG, "onResume() called");
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        Log.d(TAG, "onStop() called");
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        Log.d(TAG, "onDestroy() called");
+    }
 
 
 
