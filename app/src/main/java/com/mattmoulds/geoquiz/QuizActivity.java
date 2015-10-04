@@ -89,11 +89,11 @@ public class QuizActivity extends ActionBarActivity {
             }
         });
 
-        mNextButton = (ImageButton) findViewById(R.id.next_button);
+        //mNextButton = (ImageButton) findViewById(R.id.next_button);
         mNextButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //mCurrentIndex = (mCurrentIndex + 1) % mQuestionBank.length;
+                mCurrentIndex = (mCurrentIndex + 1) % mQuestionBank.length;
 
                 updateQuestion();
             }
