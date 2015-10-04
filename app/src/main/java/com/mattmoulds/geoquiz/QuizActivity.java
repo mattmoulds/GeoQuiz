@@ -36,6 +36,8 @@ public class QuizActivity extends ActionBarActivity {
     private int mCurrentIndex = 0;
 
     private void updateQuestion() {
+        Log.d(TAG, "Updating question text for question # " + mCurrentIndex,
+                new Exception());
         int question = mQuestionBank[mCurrentIndex].getTextResId();
         mQuestionTextView.setText(question);
     }
@@ -93,7 +95,7 @@ public class QuizActivity extends ActionBarActivity {
         mNextButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mCurrentIndex = (mCurrentIndex + 1) % mQuestionBank.length;
+                //mCurrentIndex = (mCurrentIndex + 1) % mQuestionBank.length;
 
                 updateQuestion();
             }
