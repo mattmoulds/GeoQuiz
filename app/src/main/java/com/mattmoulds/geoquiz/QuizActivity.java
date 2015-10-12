@@ -83,6 +83,7 @@ public class QuizActivity extends ActionBarActivity {
 
         if (savedInstanceState != null) {
             mCurrentIndex = savedInstanceState.getInt(KEY_INDEX, 0);
+            mIsCheater = savedInstanceState.getBoolean("cheater");
         }
 
         mQuestionTextView = (TextView) findViewById(R.id.question_text_view);
@@ -155,6 +156,7 @@ public class QuizActivity extends ActionBarActivity {
         super.onSaveInstanceState(savedInstanceState);
         Log.i(TAG, "onSaveInstanceState");
         savedInstanceState.putInt(KEY_INDEX, mCurrentIndex);
+        savedInstanceState.putBoolean("cheater", mIsCheater);
     }
 
     @Override
