@@ -26,7 +26,7 @@ public class CheatActivity extends ActionBarActivity {
     private boolean mAnswerIsTrue;
     private TextView mAnswerTextView;
     private Button mShowAnswer;
-    private boolean isCheater;
+    private Boolean isCheater = false;
 
 
     public static Intent newIntent(Context packageContext, boolean answerIsTrue) {
@@ -36,21 +36,21 @@ public class CheatActivity extends ActionBarActivity {
     }
 
     public static boolean wasAnswerShown(Intent result) {
-        return result.getBooleanExtra(EXTRA_ANSWER_SHOWN, true);
+        return result.getBooleanExtra(EXTRA_ANSWER_SHOWN, false);
     }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cheat);
-        isCheater = true;
-        if (savedInstanceState != null) {
-            isCheater = savedInstanceState.getBoolean(EXTRA_ANSWER_SHOWN);
-        }
 
         mAnswerIsTrue = getIntent().getBooleanExtra(EXTRA_ANSWER_IS_TRUE, false);
-
         mAnswerTextView = (TextView) findViewById(R.id.answer_text_view);
+
+        if (savedInstanceState!= null){
+            isCheater = savedInstanceState.getBoolean(EXTRA_ANSWER_SHOWN);
+            setAnswerShownResult(isCheater);
+        }
 
 
         mShowAnswer = (Button) findViewById(R.id.show_answer_button);
@@ -63,8 +63,8 @@ public class CheatActivity extends ActionBarActivity {
                 } else {
                     mAnswerTextView.setText(R.string.false_button);
                 }
-                setAnswerShownResult(true);
                 isCheater = true;
+                setAnswerShownResult(isCheater);
 
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
                     int cx = mShowAnswer.getWidth() / 2;
@@ -92,16 +92,16 @@ public class CheatActivity extends ActionBarActivity {
     private void setAnswerShownResult(boolean inAnswerShown) {
         Intent data = new Intent();
         data.putExtra(EXTRA_ANSWER_SHOWN, inAnswerShown);
-        data.putExtra(EXTRA_ANSWER_IS_TRUE, isCheater);
         setResult(RESULT_OK, data);
     }
 
     @Override
-    public void onSaveInstanceState(Bundle savedInstanceState) {
+    protected void onSaveInstanceState(Bundle savedInstanceState) {
         super.onSaveInstanceState(savedInstanceState);
         savedInstanceState.putBoolean(EXTRA_ANSWER_SHOWN, isCheater);
 
     }
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
